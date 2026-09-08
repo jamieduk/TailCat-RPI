@@ -2,6 +2,8 @@ TailCat For RPI (Arm64) Setup By J~Net 2026
 jnetai.com
 
 
+git clone https://github.com/jamieduk/TailCat-RPI.git
+cd TailCat-RPI
 chmod +x *.sh
 
 ./setup.sh
@@ -15,7 +17,8 @@ Example Output:
 # 🐈 Server listening with new address: tcpGFwWCDRYYEiRrRD72p172aockhP7Lk2zcCWyYnvqVDEXSq5H2FrWCASBl_6KNeqEmkNIJ9a3A2lAJkhSnqffDXJ7-TRezrqGGFxWCA7k8hHS-Lz_LPwBfN1Db3-okT5aNVdIG4kzjc88y3laGFpGQEv
 
 
-
+Manual Install 
+https://github.com/jamieduk/TailCat-RPI
 
 For Other versions
 
