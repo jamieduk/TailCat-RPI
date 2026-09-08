@@ -8,7 +8,11 @@ chmod +x *.sh
 
 ./setup.sh
 
+# Get an address string
 tailcat
+
+# Use address string to connect
+tailcat string-here!
 
 
 Example Output:
