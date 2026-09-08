@@ -1,3 +1,7 @@
+
+YT
+https://www.youtube.com/watch?v=FDNi1OxQwbs
+
 tailcat --help
 COMMAND
   tailcat -- securely pipe or serve network connections over Tailscale's data plane (WireGuard®, NAT traversal), without Tailscale's control plane (central server, accounts)
