@@ -6,6 +6,7 @@
 A simple setup script for installing and configuring **TailCat** on Raspberry Pi systems running **ARM64 Linux**.
 
 ---
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FDNi1OxQwbs?si=bpUt_8W3eQCZz9mp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 📋 Requirements
 
