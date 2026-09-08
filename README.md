@@ -64,6 +64,12 @@ tailcat serve no-auth-ssh
 # Connect
 tailcat ssh address-here!
 
+# Recieve file example
+tailcat recv .
+
+# Send file example
+tailcat cp Notes.txt address-here!
+
 ---
 
 ## 🥧 Raspberry Pi ARM64
