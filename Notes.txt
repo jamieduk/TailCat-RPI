@@ -22,6 +22,8 @@ Example Output:
 # Use as SSH without auth
 tailcat serve no-auth-ssh
 
+# Connect
+tailcat ssh address-here!
 
 Manual Install 
 https://github.com/jamieduk/TailCat-RPI

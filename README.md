@@ -61,6 +61,9 @@ The generated `tcp...` address is the address provided by TailCat for connecting
 # Use as SSH without auth
 tailcat serve no-auth-ssh
 
+# Connect
+tailcat ssh address-here!
+
 ---
 
 ## 🥧 Raspberry Pi ARM64
