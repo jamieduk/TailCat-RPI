@@ -37,8 +37,11 @@ The setup script will install and configure TailCat for your Raspberry Pi.
 After installation, run:
 
 ```bash
-# (c) J~Net 2026
+# Get an address string
 tailcat
+
+# Use address string to connect
+tailcat string-here!
 ```
 
 If everything is working correctly, TailCat will start its server and select an appropriate bootstrap relay region.
