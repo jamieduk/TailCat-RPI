@@ -1,0 +1,156 @@
+tailcat --help
+COMMAND
+  tailcat -- securely pipe or serve network connections over Tailscale's data plane (WireGuard®, NAT traversal), without Tailscale's control plane (central server, accounts)
+
+USAGE
+  tailcat [flags] [<subcommand> [flags]] [args...]
+
+Server mode, accept one connection (any port), write to stdout:
+
+	tailcat
+
+Server mode, given ports (see "tailcat serve --help" for more):
+
+	tailcat serve 22,80,443,8000-8999
+
+Server mode, all ports:
+
+	tailcat serve all
+
+Server mode, certain ports and auth-free SSH:
+
+	tailcat serve 80,no-auth-ssh
+
+Server mode, SSH requiring an authorized public key:
+
+	tailcat serve --ssh-authorized-keys=alice@github ssh
+
+Server mode, exit node (clients can reach the server's whole network):
+
+	tailcat serve exit-node
+
+Server mode, receive files into a directory (a write-only drop box
+served to "tailcat cp"; see also serve's files service):
+
+	tailcat recv ~/inbox
+
+Client mode, to default port 1 for stdin/stdout pipe:
+
+	echo hello | tailcat <tc-addr>
+
+Client mode to an explicit port:
+
+	echo "GET / HTTP/1.1..." | tailcat <tc-addr> 80
+
+Anywhere a <tc-addr> argument is accepted, a DNS name whose
+"tailcat=" TXT record contains one may be used instead:
+
+	tailcat ssh example.com
+
+Client mode, ping. Each pong reports whether it arrived via a DERP
+relay or a direct path. --until-direct keeps pinging (bounded by
+--timeout, default 10s) until a direct path works:
+
+	tailcat ping <tc-addr>
+	tailcat ping --until-direct <tc-addr>
+
+Client mode, ssh:
+
+	tailcat ssh [user@]<tc-addr>
+	tailcat ssh [user@]<tc-addr> <command> [args...]
+
+Client mode, ssh to specific IP:port via the tailcat address's exit node:
+
+	tailcat ssh -p 10.0.0.1:22 <tc-addr>
+
+Client mode, copy files to or from a server (see "tailcat cp --help"
+and serve's files service):
+
+	tailcat cp foo.txt <tc-addr>:
+	tailcat cp -r <tc-addr>:dir ./dir
+
+Client mode, list the files a server offers:
+
+	tailcat ls [-l] <tc-addr>[:path]
+
+Client mode, forward local TCP ports to a tailcat server:
+
+	tailcat forward [--bind=<addr>] <tc-addr> <[local:]remote> ...
+
+Client mode, run an ephemeral SOCKS5 proxy and pass its address
+as 'all_proxy' environment variable to a child process. Destination
+hostnames that are themselves tailcat addresses are dialed as tailcat
+servers, so the <tc-addr> argument is optional:
+
+	tailcat socks [--listen=<addr:port>] [<tc-addr>] [<cmd> [args...]]
+	tailcat socks <tc-addr> curl http://server.tailcat:8081/
+	tailcat socks curl http://<tc-addr>:8081/
+
+With no <cmd>, the SOCKS5 proxy server runs by itself and prints
+its address.
+
+Parse a tailcat address and print its encoded fields as JSON:
+
+	tailcat parse <tc-addr>
+
+Resolve a short tailcat address into a longer self-contained one with
+embedded DERP server info (see also serve's --full-address flag):
+
+	tailcat resolve <tc-addr>
+
+Print the public key of the client key that would be used (see --key):
+
+	tailcat printpub
+
+Generate and save a persistent server key and print its tailcat address
+(run "tailcat genkey --help" for its flags). The key name "default"
+is magic: server mode uses it automatically once it exists:
+
+	tailcat genkey --key=default
+
+Generate and save a persistent client key and print its public key,
+for use in a server's --allow list. Client modes automatically use
+the key named "client-default" when it exists:
+
+	tailcat genkey --client --key=client-default
+
+List or delete saved keys:
+
+	tailcat genkey --list
+	tailcat genkey --delete --key=<name>
+
+Print the full documentation (the project README) with more examples:
+
+	tailcat readme
+
+Environment:
+
+	TAILCAT_ADDR_FILE: in server mode, write the tailcat address to the
+	given file path or, with a "tcp:" prefix, send it to that TCP
+	address.
+
+	TAILCAT_DERPMAP_URL: the default value of the --derpmap-url flag.
+
+SUBCOMMANDS
+  serve      run a server (the default when tailcat is run with no arguments)
+  ping       ping a server, reporting DERP or direct paths
+  socks      run a SOCKS5 proxy that dials tailcat servers
+  recv       receive files: serve a directory as a write-only drop box
+  ssh        connect the system ssh client through a tailcat server
+  cp         copy files to or from a tailcat server, using the system scp
+  ls         list files on a tailcat server
+  forward    forward local TCP ports to a tailcat server
+  parse      decode a tailcat address and print its fields as JSON
+  resolve    expand a short tailcat address to embed its DERP server info
+  genkey     generate, list, or delete saved keys
+  printpub   print the public key of the client key that would be used
+  version    print the tailcat version
+  readme     print the tailcat README (documentation with usage examples)
+
+FLAGS
+  --serve STRING         comma-separated list of port numbers, port ranges, or service names to serve; the same list the serve subcommand takes as arguments. Service names are: 'all' (serve all ports), 'exit-node' (run an exit node for all addresses), 'ssh' (public-key-authenticated SSH server; see serve's --ssh-authorized-keys flag), 'no-auth-ssh' (auth-free SSH server), 'files' (file server for SFTP clients; see serve's --files flag). If empty, it accepts a single connection on any port, writes it to stdout, and exits.
+  --key STRING           'new' for an ephemeral key. If empty, the default saved key is used if it exists ('default' in server mode, 'client-default' in client modes; see genkey), else an ephemeral key. Otherwise the path to a *.private.json or a name like 'foo' to read it from $CONFIG/tailcat/keys/foo.private.json
+  --verbose              be verbose
+  --json                 in server mode, write {"listenAddr": ...} JSON to stdout
+  --derpmap-url STRING   URL of the JSON DERP map used to resolve or auto-select a DERP region; its default can also be set with the TAILCAT_DERPMAP_URL environment variable (default: https://tailcat.dev/derpmap.json)
+
