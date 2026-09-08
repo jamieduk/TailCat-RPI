@@ -22,7 +22,8 @@ A simple setup script for installing and configuring **TailCat** on Raspberry Pi
 Clone or download this project, then run:
 
 ```bash
-# (c) J~Net 2026
+git clone https://github.com/jamieduk/TailCat-RPI.git
+cd TailCat-RPI
 chmod +x *.sh
 ./setup.sh
 ```
@@ -95,3 +96,4 @@ If you need TailCat for a different architecture or operating system, download t
 This setup project is provided by **J~Net**.
 
 **© J~Net 2026**
+
