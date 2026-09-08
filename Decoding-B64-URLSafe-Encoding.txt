@@ -1,0 +1,10 @@
+
+
+# Base64 Decode Base64 url safe encoded data!
+tailcat parse 'tcpGFwWCDMpzXFcumkRYd5QzEUFPfrud3i6ouM9rmwMz5x3AZqPGFrWCAosKZEZVWEGzhgQI1kBKmFQZYMlJxaEN8XRIceeIJOE2FxWCBKHrQbQZkQa3DLeZdg9qhlw9ckL3B-7W7X8j3AU22CP2FpGQEv'
+
+
+
+
+# Or use python
+python3 -c 'import base64,sys,cbor2,json; s=sys.argv[1]; s=s[2:] if s.startswith("tc") else s; s=s.replace("-","+").replace("_","/"); s+="="*(-len(s)%4); x=cbor2.loads(base64.b64decode(s)); print(json.dumps(x,indent=2,default=lambda x:x.hex()))' 'tcpGFwWCDMpzXFcumkRYd5QzEUFPfrud3i6ouM9rmwMz5x3AZqPGFrWCAosKZEZVWEGzhgQI1kBKmFQZYMlJxaEN8XRIceeIJOE2FxWCBKHrQbQZkQa3DLeZdg9qhlw9ckL3B-7W7X8j3AU22CP2FpGQEv'
