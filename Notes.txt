@@ -14,11 +14,13 @@ tailcat
 # Use address string to connect
 tailcat string-here!
 
-
 Example Output:
 
 # Selected bootstrap relay region 303, Frankfurt
 # 🐈 Server listening with new address: tcpGFwWCDRYYEiRrRD72p172aockhP7Lk2zcCWyYnvqVDEXSq5H2FrWCASBl_6KNeqEmkNIJ9a3A2lAJkhSnqffDXJ7-TRezrqGGFxWCA7k8hHS-Lz_LPwBfN1Db3-okT5aNVdIG4kzjc88y3laGFpGQEv
+
+# Use as SSH without auth
+tailcat serve no-auth-ssh
 
 
 Manual Install 

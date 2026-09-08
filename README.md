@@ -57,6 +57,10 @@ If everything is working correctly, TailCat will start its server and select an 
 
 The generated `tcp...` address is the address provided by TailCat for connecting to the running server.
 
+
+# Use as SSH without auth
+tailcat serve no-auth-ssh
+
 ---
 
 ## 🥧 Raspberry Pi ARM64
@@ -66,7 +70,6 @@ This setup is intended specifically for **ARM64 Raspberry Pi systems**.
 To check your architecture:
 
 ```bash
-# (c) J~Net 2026
 uname -m
 ```
 
